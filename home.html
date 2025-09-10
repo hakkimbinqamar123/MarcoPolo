@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marco Polo - Men's Wear</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<style>
+    .category-card {
+        flex: 0 0 25%;
+        /* 4 items per row */
+        max-width: 25%;
+    }
+
+    .category-img {
+        width: 100%;
+        height: 200px;
+        /* fixed height for uniform size */
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    #card:hover {
+        transform: translate(00.75rem);
+    }
+</style>
+
+<body class="bg-light container">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top bg-white py-3 px-4">
+        <div class="container-fluid">
+            <!-- Brand -->
+            <a class="navbar-brand d-flex flex-column text-center fw-bold lh-2" href="#">
+                <span>MARCO POLO</span>
+                <small class="text-muted" style="font-size: 0.75rem;">MEN'S WEAR</small>
+            </a>
+
+            <!-- Navbar Items -->
+            <div class="d-flex align-items-center">
+                <ul class="navbar-nav me-3 d-none d-lg-flex">
+                    <li class="nav-item mx-3"><a class="nav-link fw-semibold active" href="./dashboard.html">Admin</a></li>
+                    <li class="nav-item mx-3"><a class="nav-link fw-semibold active" href="#">HOME</a></li>
+                    <li class="nav-item mx-3"><a class="nav-link fw-semibold" href="./products.html">SHOP</a></li>
+                    <li class="nav-item mx-3"><a class="nav-link fw-semibold" href="./about.html">ABOUT</a></li>
+                    <li class="nav-item mx-3"><a class="nav-link fw-semibold" href="#">CONTACT</a></li>
+                </ul>
+                <a href="./cart.html" class="nav-link"><i class="bi bi-cart3 fs-4"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="container my-1 hero-section">
+        <div class="row g-0 border">
+            <!-- Left Content -->
+            <div class="col-md-6 d-flex flex-column align-items-center justify-content-center bg-dark text-white p-4">
+                <h1 class="fw-bold mb-3">REDEFINE YOUR STYLE <br>WITH "MARCO POLO"</h1>
+                <a href="#" class="btn btn-warning btn-lg fw-semibold"
+                    style="width: 150px; background-color: #e9c810;">SHOP NOW</a>
+            </div>
+            <!-- Right Image -->
+            <div class="col-md-6">
+                <img src="./images/bg_img.jpeg" alt="Men's Wear" class="img-fluid w-100 h-100">
+            </div>
+        </div>
+    </section>
+
+
+    <!-- featured categories -->
+    <section class="container my-5">
+        <h3 class="fw-bold mb-4">Featured Categories</h3>
+        <div class="position-relative">
+            <!-- left arrow -->
+            <button class="btn btn-light position-absolute top-50 start-0 translate-middle-y shadow" id="catPrev"
+                style="z-index: 10;">
+                <span class="fw-bold">&lt;</span>
+            </button>
+
+            <div class="d-flex overflow-hidden" id="categoryScroll" style="scroll-behavior: smooth;">
+                <div class="category-card text-center p-3">
+                    <img src="./images/Trousers.jpg" class="category-img mb-2" alt="Trousers" style="height: 250px;">
+                    <h6 class="fw-semibold">Trousers</h6>
+                </div>
+                <div class="category-card text-center p-3">
+                    <img src="./images/Blazers.jpg" class="category-img mb-2" alt="Blazers" style="height: 250px;">
+                    <h6 class="fw-semibold">Blazers</h6>
+                </div>
+                <div class="category-card text-center p-3">
+                    <img src="./images/Accessories.jpg" class="category-img mb-2" alt="Accessories"
+                        style="height: 250px;">
+                    <h6 class="fw-semibold">Accessories</h6>
+                </div>
+                <div class="category-card text-center p-3">
+                    <img src="./images/shoes.jpg" class="category-img mb-2" alt="Shoes" style="height: 250px;">
+                    <h6 class="fw-semibold">Shoes</h6>
+                </div>
+                <div class="category-card text-center p-3">
+                    <img src="./images/bg_img.jpeg" class="category-img mb-2" alt="Jackets" style="height: 250px;">
+                    <h6 class="fw-semibold">Jackets</h6>
+                </div>
+
+                <button class="btn btn-light position-absolute top-50 end-0 translate-middle-y shadow" id="catNext"
+                    style="z-index: 10;">
+                    <span class="fw-bold">&gt;</span>
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- featured categories ends -->
+
+    <!-- trending products -->
+
+    <section class="container my-5">
+        <h3 class="fw-bold mb-4">Trending Products</h3>
+        <div class="row">
+            <div class="col-3">
+                <div class="card shadow">
+                    <img src="./images/Blazers.jpg" alt="Blazers" style="height: 300px; object-fit: cover;">
+                    <h5 class="fw-bold text-center">Blazers</h5>
+                    <p class="fw-bold text-center">$57.5</p>
+                    <div class="d-flex justify-content-center mb-3">
+                        <button class="btn btn-lg fw-semibold" style="width: 150px; background-color: #e9c810;">Add to
+                            Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card shadow">
+                    <img src="./images/shirts2.jpg" alt="Blazers" style="height: 300px; object-fit: cover;">
+                    <h5 class="fw-bold text-center">Shirts</h5>
+                    <p class="fw-bold text-center">$57.5</p>
+                    <div class="d-flex justify-content-center mb-3">
+                        <button class="btn btn-warning btn-lg fw-semibold"
+                            style="width: 150px; background-color: #e9c810;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card shadow">
+                    <img src="./images/specs.jpg" alt="Blazers" style="height: 300px; object-fit: cover;">
+                    <h5 class="fw-bold text-center">Glass</h5>
+                    <p class="fw-bold text-center">$57.5</p>
+                    <div class="d-flex justify-content-center mb-3">
+                        <button class="btn btn-warning btn-lg fw-semibold"
+                            style="width: 150px; background-color: #e9c810;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card shadow">
+                    <img src="./images/tshirt.jpg" alt="Blazers" style="height: 300px; object-fit: cover;">
+                    <h5 class="fw-bold text-center">T-Shirts</h5>
+                    <p class="fw-bold text-center">$57.5</p>
+                    <div class="d-flex justify-content-center mb-3">
+                        <button class="btn btn-warning btn-lg fw-semibold"
+                            style="width: 150px; background-color: #e9c810;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= Testimonials Section ================= -->
+    <section class="container my-5">
+        <h3 class="fw-bold mb-4 text-center">What Our Customers Say</h3>
+        <div class="row g-4" id="testimonial-list">
+            <!-- Testimonial Card 1 -->
+            <div class="col-md-4" id="card">
+                <div class="card shadow border-0 p-3 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg"
+                            class="rounded-circle me-3" alt="Customer" style="height: 100px; object-fit: cover;">
+                        <div>
+                            <h6 class="fw-bold mb-0">John Doe</h6>
+                            <small class="text-muted">Businessman</small>
+                        </div>
+                    </div>
+                    <p>"Marco Polo offers the best quality blazers I’ve ever bought. Stylish, comfortable, and worth
+                        every penny!"</p>
+                </div>
+            </div>
+
+            <!-- Testimonial Card 2 -->
+            <div class="col-md-4" id="card">
+                <div class="card shadow border-0 p-3 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg"
+                            class="rounded-circle me-3" alt="Customer" style="height: 100px; object-fit: cover;">
+                        <div>
+                            <h6 class="fw-bold mb-0">Sarah Lee</h6>
+                            <small class="text-muted">Designer</small>
+                        </div>
+                    </div>
+                    <p>"I love the shirts collection here. They are so comfortable and look premium at the same time!"
+                    </p>
+                </div>
+            </div>
+
+            <!-- Testimonial Card 3 -->
+            <div class="col-md-4" id="card">
+                <div class="card shadow border-0 p-3 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg"
+                            class="rounded-circle me-3" alt="Customer" style="height: 100px; object-fit: cover;">
+                        <div>
+                            <h6 class="fw-bold mb-0">Michael Smith</h6>
+                            <small class="text-muted">Entrepreneur</small>
+                        </div>
+                    </div>
+                    <p>"Great shopping experience! The trousers fit perfectly and delivery was super quick."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= Add Testimonial Form ================= -->
+    <section class="container my-5">
+        <h3 class="fw-bold mb-4 text-center">Add Your Testimonial</h3>
+        <form id="testimonial-form" class="p-4 shadow rounded bg-light">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="role" placeholder="Your Role (e.g., Student, Designer)"
+                        required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <input type="url" class="form-control" id="photo" placeholder="Photo URL (optional)">
+            </div>
+            <div class="mb-3">
+                <textarea class="form-control" id="message" rows="3" placeholder="Write your testimonial..."
+                    required></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark w-100">Submit Testimonial</button>
+        </form>
+    </section>
+
+
+    <!-- Footer Section -->
+    <footer class="mt-5">
+
+        <!-- Top Offer Banner -->
+        <div class="text-center py-4 shadow-sm" style="background-color: #F5F5DC;">
+            <p class="mb-1 text-uppercase fw-semibold">Special Offer</p>
+            <h2 class="fw-bold">UP TO 50% OFF</h2>
+        </div>
+
+        <!-- Main Footer -->
+        <div class="bg-dark text-white py-5">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Brand / About -->
+                    <div class="col-md-5 mb-4">
+                        <h3 class="fw-bold">Marco Polo</h3>
+                        <p class="small">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </p>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="col-md-2 mb-4">
+                        <h3 class="fw-bold mb-3">Quick Links</h3>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-white text-decoration-none">Home</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">Shop</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">Reviews</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Newsletter -->
+                    <div class="col-md-5 mb-4">
+                        <h3 class="fw-bold mb-3">Newsletter</h3>
+                        <form class="d-flex">
+                            <input type="email" class="form-control me-2" placeholder="Enter your email">
+                            <button class="btn fw-semibold" type="submit"
+                                style="background-color: #e9c810;">SUBSCRIBE</button>
+                        </form>
+
+                        <!-- Social Icons -->
+                        <div class="mt-4 d-flex gap-3">
+                            <a href="#" class="text-white fs-4"><i class="bi bi-whatsapp"></i></a>
+                            <a href="#" class="text-white fs-4"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="text-white fs-4"><i class="bi bi-youtube"></i></a>
+                            <a href="#" class="text-white fs-4"><i class="bi bi-telegram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <script>
+        const scrollContainer = document.getElementById("categoryScroll")
+        const nextBtn = document.getElementById("catNext")
+        const prevBtn = document.getElementById("catPrev")
+
+        nextBtn.addEventListener("click", () => {
+            scrollContainer.scrollBy({ left: scrollContainer.clientWidth, behavior: "smooth" })
+        })
+
+        prevBtn.addEventListener("click", () => {
+            scrollContainer.scrollBy({ left: -scrollContainer.clientWidth, behavior: "smooth" })
+        })
+
+
+
+        document.getElementById("testimonial-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // Get form values
+            const name = document.getElementById("name").value;
+            const role = document.getElementById("role").value;
+            const photo = document.getElementById("photo").value || "https://via.placeholder.com/60";
+            const message = document.getElementById("message").value;
+
+            // Create new testimonial card
+            const newTestimonial = `
+      <div class="col-md-4">
+        <div class="card shadow border-0 p-3 h-100">
+          <div class="d-flex align-items-center mb-3">
+            <img src="${photo}" class="rounded-circle me-3" alt="Customer">
+            <div>
+              <h6 class="fw-bold mb-0">${name}</h6>
+              <small class="text-muted">${role}</small>
+            </div>
+          </div>
+          <p>"${message}"</p>
+        </div>
+      </div>
+    `;
+
+            // Append to testimonial list
+            document.getElementById("testimonial-list").innerHTML += newTestimonial;
+
+            // Reset form
+            document.getElementById("testimonial-form").reset();
+        });
+    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
