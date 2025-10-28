@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react"
 import { useAppContext } from "../context/AppContext"
 import { dummyAddress } from "../assets/assets"
+import toast from "react-hot-toast"
 
 const Cart = () => {
     const [showAddress, setShowAddress] = useState(false)
 
-    const { products, currency, cartItems, removeFromCart, getCartCount, updateCartItem, navigate, getCartAmount } = useAppContext()
+    const { products, user, setCartItems, currency, cartItems, removeFromCart, getCartCount, updateCartItem, navigate, getCartAmount, axios } = useAppContext()
     const [cartArray, setCartArray] = useState([])
-    const [addresses, setAddresses] = useState(dummyAddress)
-    const [selectedAddress, setSelectedAddress] = useState(dummyAddress[0])
+    const [addresses, setAddresses] = useState([])
+    const [selectedAddress, setSelectedAddress] = useState(null)
     const [paymentOption, setPaymentOption] = useState("COD")
 
     const getCart = () => {
@@ -16,20 +17,106 @@ const Cart = () => {
         for (const key in cartItems) {
             const product = products.find((item) => item._id === key)
             product.quantity = cartItems[key]
+            console.log("Cart item quantity:", cartItems[key])
             tempArray.push(product)
         }
         setCartArray(tempArray)
     }
 
-    const placeOrder = async ()=>{
-
+    const getUserAddress = async () => {
+        try {
+            const { data } = await axios.get('/api/address/get')
+            if (data.success) {
+                setAddresses(data.addresses)
+                if (data.addresses.length > 0) {
+                    setSelectedAddress(data.addresses[0])
+                }
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
     }
+
+    const placeOrder = async () => {
+        try {
+            if (!selectedAddress) {
+                return toast.error("Please select an address");
+            }
+
+            if (paymentOption === "COD") {
+                // COD order
+                const { data } = await axios.post('/api/order/cod', {
+                    userId: user._id,
+                    items: cartArray.map(item => ({ product: item._id, quantity: item.quantity })),
+                    address: selectedAddress._id
+                });
+
+                if (data.success) {
+                    toast.success(data.message);
+                    setCartItems({});
+                    navigate('/my-orders');
+                } else {
+                    toast.error(data.message);
+                }
+
+            } else {
+                // Razorpay order
+                const { data } = await axios.post('/api/order/razorpay', {
+                    userId: user._id,
+                    items: cartArray.map(item => ({ product: item._id, quantity: item.quantity })),
+                    address: selectedAddress._id
+                });
+
+                if (data.success) {
+                    const options = {
+                        key: data.key,
+                        amount: data.amount,
+                        currency: data.currency,
+                        name: "Marco Polo",
+                        description: "Order Payment",
+                        order_id: data.orderId,
+                        handler: async function (response) {
+                            toast.success("Payment Successful!");
+                            // You can verify the payment here via backend verify API
+                            navigate('/my-orders');
+                        },
+                        prefill: {
+                            name: user.name,
+                            email: user.email,
+                        },
+                        theme: {
+                            color: "#3399cc",
+                        },
+                    };
+
+                    const rzp = new window.Razorpay(options);
+                    rzp.open();
+                    setCartItems({});
+                    toast.success(data.message)
+                } else {
+                    toast.error(data.message);
+                }
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
+    };
+
+
 
     useEffect(() => {
         if (products.length > 0 && cartItems) {
             getCart()
         }
     }, [products, cartItems])
+
+    useEffect(() => {
+        if (user) {
+            getUserAddress()
+        }
+    }, [user])
 
     return products.length > 0 && cartItems ? (
         <div className="flex flex-col md:flex-row mt-16">
@@ -101,8 +188,10 @@ const Cart = () => {
                         {showAddress && (
                             <div className="absolute top-12 py-1 bg-white border border-gray-300 text-sm w-full">
                                 {addresses.map((address, index) => (
-                                    <p onClick={() => { setSelectedAddress(address);
-                                     setShowAddress(false)}} className="text-gray-500 p-2 hover:bg-gray-100">
+                                    <p onClick={() => {
+                                        setSelectedAddress(address);
+                                        setShowAddress(false)
+                                    }} className="text-gray-500 p-2 hover:bg-gray-100">
                                         {address.street}, {address.city}, {address.state}, {address.country}
                                     </p>
                                 ))}
@@ -131,10 +220,10 @@ const Cart = () => {
                         <span>Shipping Fee</span><span className="text-yellow-600">Free</span>
                     </p>
                     <p className="flex justify-between">
-                        <span>Tax (2%)</span><span>{currency}{getCartAmount() *2 / 100}</span>
+                        <span>Tax (2%)</span><span>{currency}{getCartAmount() * 2 / 100}</span>
                     </p>
                     <p className="flex justify-between text-lg font-medium mt-3">
-                        <span>Total Amount:</span><span>{currency} {getCartAmount() + getCartAmount() *2 / 100}</span>
+                        <span>Total Amount:</span><span>{currency} {getCartAmount() + getCartAmount() * 2 / 100}</span>
                     </p>
                 </div>
 

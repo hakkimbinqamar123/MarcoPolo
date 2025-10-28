@@ -37,15 +37,6 @@ const AllProducts = () => {
     const { products, searchQuery } = useAppContext()
     const [filteredProducts, setFilteredProducts] = useState([])
 
-    const [minPrice, setMinPrice] = useState(10);
-    const [maxPrice, setMaxPrice] = useState(200);
-    const [modalProduct, setModalProduct] = useState(null);
-
-    const handleRangeChange = (e, type) => {
-        const value = Number(e.target.value);
-        if (type === "min") setMinPrice(value);
-        else setMaxPrice(value);
-    };
 
     useEffect(()=>{
         if (searchQuery.length > 0) {

@@ -4,15 +4,25 @@ import { dummyOrders } from '../assets/assets';
 
 const MyOrders = () => {
   const [myOrders, setMyOrders] = useState([]);
-  const { currancy } = useAppContext();
+  const { currancy, axios, user } = useAppContext();
 
   const fetchMyOrders = async () => {
-    setMyOrders(dummyOrders);
+    try {
+      const { data } = await axios.get('/api/order/user')
+      console.log(data)
+      if (data.success) {
+        setMyOrders(data.orders)
+      }
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   useEffect(() => {
-    fetchMyOrders();
-  }, []);
+    if (user) {
+      fetchMyOrders();
+    }
+  }, [user]);
 
   return (
     <div className="mt-16 pb-16 px-4 md:px-8 lg:px-16">
@@ -68,13 +78,12 @@ const MyOrders = () => {
                     <p>
                       <span className="font-semibold">Status:</span>{' '}
                       <span
-                        className={`px-2 py-1 rounded-full text-white text-xs ${
-                          order.status === 'Delivered'
+                        className={`px-2 py-1 rounded-full text-white text-xs ${order.status === 'Delivered'
                             ? 'bg-green-500'
                             : order.status === 'Order Placed'
-                            ? 'bg-blue-500'
-                            : 'bg-yellow-500'
-                        }`}
+                              ? 'bg-blue-500'
+                              : 'bg-yellow-500'
+                          }`}
                       >
                         {order.status}
                       </span>

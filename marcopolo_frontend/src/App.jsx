@@ -11,7 +11,6 @@ import AllProducts from './pages/AllProducts'
 import ProductCategory from './pages/ProductCategory'
 import ProductDetails from './pages/ProductDetails'
 import Cart from './pages/Cart'
-import AddAddress from './pages/addAddress'
 import MyOrders from './pages/MyOrders'
 import SellerLogin from './components/Seller/SellerLogin'
 import SellerLayout from './pages/Seller/SellerLayout'
@@ -20,6 +19,8 @@ import ProductList from './pages/Seller/ProductList'
 import Orders from './pages/Seller/Orders'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import AddAddress from './pages/AddAddress'
+import Loading from './components/Loading'
 
 const App = () => {
 
@@ -45,6 +46,7 @@ const App = () => {
           <Route path='/contactus' element={<Contact />} />
           <Route path='/add-address' element={<AddAddress />} />
           <Route path='/my-orders' element={<MyOrders />} />
+          <Route path='/loader' element={<Loading />} />
           <Route path='/seller' element={isSeller ? <SellerLayout /> : <SellerLogin />}>
             <Route index element={isSeller ? <AddProduct /> : null} />
             <Route path='product-list' element={<ProductList />} />

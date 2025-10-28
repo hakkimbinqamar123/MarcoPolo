@@ -1,8 +1,10 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { useAppContext } from "../../context/AppContext";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const SellerLayout = () => {
-    const { setIsSeller } = useAppContext();
+    const { setIsSeller, axios, navigate } = useAppContext();
 
     const dashboardicon = (
         <i className="bi bi-folder-plus text-black" style={{ fontSize: "24px" }}></i>
@@ -23,7 +25,18 @@ const SellerLayout = () => {
     ];
 
     const logout = async () => {
-        setIsSeller(false);
+        try {
+            const {data} = await axios.get('/api/seller/logout')
+            if (data.success) {
+                toast.success(data.message)
+                navigate('/')
+                setIsSeller(false);
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
     };
 
     return (

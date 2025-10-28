@@ -1,14 +1,25 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useAppContext } from '../context/AppContext'
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false)
-  const { user, setUser, setShowUserLogin, navigate, setSearchQuery, searchQuery, getCartCount } = useAppContext()
+  const { user, setUser, setShowUserLogin, navigate, setSearchQuery, searchQuery, getCartCount, axios } = useAppContext()
 
   const logout = async () => {
-    setUser(null);
-    navigate("/")
+    try {
+      const { data } = await axios.get('/api/user/logout')
+      if (data.success) {
+        toast.success(data.message)
+        setUser(null);
+        navigate("/")
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
   }
 
   useEffect(() => {
@@ -21,7 +32,7 @@ const Navbar = () => {
     <>
       <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
 
-        <Link onClick={() => setOpen(false)} to="/home" className="navbar-brand d-flex flex-column text-center fw-bold lh-2">
+        <Link onClick={() => setOpen(false)} to="/" className="navbar-brand d-flex flex-column text-center fw-bold lh-2">
           <span>MARCO POLO</span>
           <small className="text-muted" style={{ fontSize: "0.75rem" }}>
             MEN'S WEAR
@@ -38,7 +49,7 @@ const Navbar = () => {
           <NavLink to="/contactus" style={{ textDecoration: "none", color: "black" }} >Contact</NavLink>
 
           <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
-            <input onChange={(e)=>setSearchQuery(e.target.value)} className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500" type="text" placeholder="Search products" />
+            <input onChange={(e) => setSearchQuery(e.target.value)} className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500" type="text" placeholder="Search products" />
             <i class="bi bi-search"></i>
           </div>
 
@@ -49,7 +60,7 @@ const Navbar = () => {
 
           {!user ? (<button onClick={() => {
             setShowUserLogin(true)
-          }}  className="cursor-pointer px-8 py-2 bg-[#e9c810] hover:text-black rounded text-white rounded-full transition">
+          }} className="cursor-pointer px-8 py-2 bg-[#e9c810] hover:text-black rounded text-white rounded-full transition">
             Login
           </button>)
             :

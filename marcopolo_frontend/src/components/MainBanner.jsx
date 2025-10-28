@@ -14,7 +14,7 @@ function MainBanner() {
                             REDEFINE YOUR STYLE <br /> WITH "MARCO POLO"
                         </h1>
                         <Link
-                            to={"/products"}
+                            to={"/allproducts"}
                             className="btn btn-warning btn-lg fw-semibold"
                             style={{
                                 width: '150px',
