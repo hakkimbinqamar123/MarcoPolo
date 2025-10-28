@@ -17,7 +17,7 @@ const port = process.env.PORT || 4000;
 await connectDB();
 await connectCloudinary()
 
-const allowedOrigins = ['http://localhost:5173']
+const allowedOrigins = ['http://localhost:5173', 'https://marco-polo-frontend.vercel.app']
 
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
